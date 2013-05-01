@@ -1,23 +1,23 @@
-﻿package product
+﻿package unit
 {
 	import def.*;
 	
 	
-	public class Taliban extends Product
+	public class ClientNobre extends Client
 	{
 		public static var objects :Array;
 		
 		
-		public function Taliban()
+		public function ClientNobre()
 		{
-			super(2,15);
+			super(0);
 			
 			if(!objects) objects = new Array();
 			objects.push(this);
 			
-			BaseMc(this).destructor = Taliban_destructor;
+			BaseMc(this).destructor = ClientNobre_destructor;
 		}
-		function Taliban_destructor()
+		function ClientNobre_destructor()
 		{
 			Utils.removeObject(this,objects);
 		}

@@ -2,12 +2,16 @@
 {
 	import def.*;
 	import building.*;
+	import unit.*;
 	
 	
 	public class Comercial extends BaseMc
 	{
 		var clicked :Boolean;
 		var loja	:Loja;
+		var client1	:ClientNobre;
+		var client2	:ClientGuerreiro;
+		var client3	:ClientCampones;
 		var money	:Number;
 		
 		
@@ -15,6 +19,10 @@
 		{
 			clicked =	false;
 			loja =		new Loja();
+			client1 =	new ClientNobre();
+			client2 =	new ClientGuerreiro();
+			client3 =	new ClientCampones();
+			client1.loja = client2.loja = client3.loja = loja;
 			money =		0;
 			
 			debug();
@@ -23,7 +31,7 @@
 		}
 		function debug()
 		{
-			trace("MONEY: "+money+" PRODUCTS: "+loja.products.length+"\n[Premium: "+loja.premium.length+"][Mana: "+loja.nama.length+"][Taliban: "+loja.taliban.length+"]");
+			trace("MONEY: "+money+" PRODUCTS: "+loja.totalProducts()+"\n[Premium: "+loja.products[0]+"][Mana: "+loja.products[1]+"][Taliban: "+loja.products[2]+"]");
 		}
 		function Comercial_display()
 		{
@@ -39,17 +47,17 @@
 			  		clicked = true;
 					
 					if(Main.key.isDown(81))			// q
-						loja.stockPremium();
+						loja.stockProduct(0);
 					else if(Main.key.isDown(65))	// a
-						lojaw.sellPremium();
+						client1.buyProduct();
 					else if(Main.key.isDown(87))	// w
-						loja.stockNama();
+						loja.stockProduct(1);
 					else if(Main.key.isDown(83))	// s
-						loja.sellNama();
+						client2.buyProduct();
 					else if(Main.key.isDown(69))	// e
-						loja.stockTaliban();
+						loja.stockProduct(2);
 					else if(Main.key.isDown(68))	// d
-						loja.sellTaliban();
+						client3.buyProduct();
 						
 					debug();
 				}

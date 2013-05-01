@@ -1,41 +1,13 @@
 ﻿package product
 {
-	import def.*;
-	
-	
-	public class Product extends BaseMc
+	public class Product
 	{
-		static var objects	:Array;
-		
-		
-		public var price	:Number;
-						/*
-						 *	$60 - Premium
-						 *	$30 - Nama
-						 *	$15 - Taliban
-						 */
-		public var id		:Number;
-						/*
-						 *	0 - Premium
-						 *	1 - Nama
-						 *	2 - Taliban
-						 */
-		
-		
-		public function Product(defId		:Number,
-								defPrice	:Number)
-		{
-			if(!objects) objects = new Array();
-			objects.push(this);
-			
-			id =	defId;
-			price = defPrice;
-			
-			BaseMc(this).destructor = Product_destructor;
-		}
-		function Product_destructor()
-		{
-			Utils.removeObject(this,objects);
-		}
+		public static const NUMPRODUCTS	:Number = 3;
+		public static const PRICE		:Array = new Array(60,30,15);
+										/*
+										 *	$60 - Premium
+										 *	$30 - Nama
+										 *	$15 - Taliban
+										 */
 	}
 }

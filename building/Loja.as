@@ -11,9 +11,9 @@
 		
 		public var maxProducts	:Number = 50;
 		public var products		:Array;
-		public var premium		:Array;
-		public var nama			:Array;
-		public var taliban		:Array;
+		
+		public var maxClients	:Number = 3;
+		public var clients		:Array;
 		
 		
 		public function Loja()
@@ -22,76 +22,39 @@
 			objects.push(this);
 			
 			products =	new Array();
-			premium =	new Array();
-			nama =		new Array();
-			taliban =	new Array();
+			for(var i=0; i<Product.NUMPRODUCTS; ++i)
+				products[i] = new Number(0);
+			clients =	new Array();
+			
 			
 			BaseMc(this).destructor = Loja_destructor;
 		}
 		function Loja_destructor()
 		{
-			for(var i=0; i<products.length; ++i)
-				BaseMc(products[i]).kill();
 			Utils.removeObject(this,objects);
 		}
 		
-		public function stockPremium()
+		public function totalProducts()
 		{
-			if(products.length < maxProducts)
-			{
-				var p :Product = new Premium();
-					products.push(p);
-					premium.push(p);
-			}
+			var len :Number = 0;
+			for(var i=0; i<Product.NUMPRODUCTS; ++i)
+				len += products[i];
+			return len;
 		}
-		public function stockNama()
+		function validId(id :Number)
 		{
-			if(products.length < maxProducts)
-			{
-				var p :Product = new Nama();
-					products.push(p);
-					nama.push(p);
-			}
+			return (id >= 0 && id < Product.NUMPRODUCTS);
 		}
-		public function stockTaliban()
+		public function stockProduct(id :Number)
 		{
-			if(products.length < maxProducts)
-			{
-				var p :Product = new Taliban();
-					products.push(p);
-					taliban.push(p);
-			}
+			if(totalProducts() < maxProducts && validId(id))
+				products[id]++;
 		}
-		
-		public function sellPremium()
+		public function sellProduct(id :Number)
 		{
-			if(products.length > 0)
-			{
-				BaseMc(products[0]).kill();
-				products.shift();
-				if(premium.length > 0)
-					premium.shift();
-			}
-		}
-		public function sellNama()
-		{
-			if(products.length > 0)
-			{
-				BaseMc(products[0]).kill();
-				products.shift();
-				if(nama.length > 0)
-					nama.shift();
-			}
-		}
-		public function sellTaliban()
-		{
-			if(products.length > 0)
-			{
-				BaseMc(products[0]).kill();
-				products.shift();
-				if(taliban.length > 0)
-					taliban.shift();
-			}
+			if(validId(id))
+				if(products[id] > 0)
+					products[id]--;
 		}
 	}
 }
