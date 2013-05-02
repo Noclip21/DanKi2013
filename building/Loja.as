@@ -41,18 +41,14 @@
 				len += products[i];
 			return len;
 		}
-		function validId(id :Number)
-		{
-			return (id >= 0 && id < Product.NUMPRODUCTS);
-		}
 		public function stockProduct(id :Number)
 		{
-			if(totalProducts() < maxProducts && validId(id))
+			if(totalProducts() < maxProducts)
 				products[id]++;
 		}
 		public function sellProduct(id :Number)
 		{
-			if(validId(id))
+			if(Product.validId(id))
 				if(products[id] > 0)
 					products[id]--;
 		}
