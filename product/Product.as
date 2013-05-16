@@ -16,14 +16,19 @@
 										 */
 		
 		
-		static function price(id :Number)
-		{
-			if(validId(id))	return lvlPrice[id][lvl[id]];
-			else			return 0;
-		}
 		public static function validId(id :Number)
 		{
 			return (id >= 0 && id < NUMPRODUCTS);
+		}
+		public static function level(id :Number)
+		{
+			if(validId(id))	return lvl[id];
+			else			return -1;
+		}
+		public static function price(id :Number)
+		{
+			if(validId(id))	return lvlPrice[id][lvl[id]];
+			else			return 0;
 		}
 		public static function upgrade(id :Number)
 		{

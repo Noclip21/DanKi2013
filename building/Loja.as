@@ -50,7 +50,11 @@
 		{
 			if(Product.validId(id))
 				if(products[id] > 0)
+				{
 					products[id]--;
+					return true;
+				}
+			return false;
 		}
 	}
 }

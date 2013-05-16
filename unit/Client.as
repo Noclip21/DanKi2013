@@ -31,7 +31,8 @@
 		
 		public function buyProduct()
 		{
-			if(loja) loja.sellProduct(preference);
+			if(loja)	return loja.sellProduct(preference);
+			else		return false;
 		}
 	}
 }
