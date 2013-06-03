@@ -9,7 +9,7 @@
 		public static var objects :Array;
 		
 		
-		public var loja :Loja;
+		//public var loja :Loja;
 		
 		
 		var preference	:Number;
@@ -31,8 +31,8 @@
 		
 		public function buyProduct()
 		{
-			if(loja)	return loja.sellProduct(preference);
-			else		return false;
+			/*if(loja)*/	return Product.sell(preference,1);
+			//else		return false;
 		}
 	}
 }
