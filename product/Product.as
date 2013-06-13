@@ -16,18 +16,18 @@
 		static var _money		:Number =	0;
 		
 		
-		static const _lvlStockPrice		:Array =	[[0,0,0],
-											 		 [0,0,0],
-											 		 [0,0,0]];
+		static const _lvlStockPrice		:Array =	[[20,25,30],
+											 		 [10,12,15],
+											 		 [3,5,7]];
 											 		/*
 											 		 *	Premium
 											 		 *	Nama
 											 		 *	Taliban
 													 */
 											  
-		static const _lvlUpgradePrice	:Array =	[[0,0,0],
-											 		 [0,0,0],
-											 		 [0,0,0]];
+		static const _lvlUpgradePrice	:Array =	[[200,250,300],
+											 		 [100,120,150],
+											 		 [30,50,70]];
 											 		/*
 											 		 *	Premium
 											 		 *	Nama
@@ -38,18 +38,18 @@
 													 [20,25,30],
 													 [5,10,15]];
 													/*
-													 *	$40,50,60 - Premium
-													 *	$20,25,30 - Nama
-												 	 *	$5,10,15 - Taliban
+													 *	Premium
+													 *	Nama
+												 	 *	Taliban
 												 	 */
 											 
-		static const _lvlAppeal			:Array =	[[50,35,20],
-													 [50,35,20],
-									 				 [50,35,20]];
+		static const _lvlAppeal			:Array =	[[1.5,0.75,0.4],
+													 [1.5,0.75,0.4],
+									 				 [1.5,0.75,0.4]];
 													/*
-													 *	50,35,20 - Premium
-													 *	50,35,20 - Nama
-													 *	50,35,20 - Taliban
+													 *	Premium
+													 *	Nama
+													 *	Taliban
 													 */
 		
 		

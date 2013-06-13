@@ -1,21 +1,36 @@
 ﻿package gui
 {
 	import def.*;
+	import unit.*;
+	import graph.*;
 	import product.*;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
 	
 	public class MenuTop extends BaseMc
 	{
-		public function set txtTalibanNum(n)	{ GUITaliban.num.text = n; 			}
-		public function set txtNamaNum(n)		{ GUINama.num.text =	n;			}
-		public function set txtPremiumNum(n)	{ GUIPremium.num.text = n;			}
+		public static const Q_STOCK :Number = 5;
 		
-		public function set txtTalibanPrice(n)	{ GUITaliban.price.text =	"$"+n;	}
-		public function set txtNamaPrice(n)		{ GUINama.price.text =		"$"+n;	}
-		public function set txtPremiumPrice(n)	{ GUIPremium.price.text =	"$"+n;	}
 		
-		public function set txtPopup(n)			{ popup.msg.text = n;				}
+		var timer				:Timer;
+		var moneyHistogram		:Histogram;
+		var clientsHistogram	:Histogram;
+		
+		
+		public function set txtTalibanNum(n)	{ GUITaliban.num.text = n; 					}
+		public function set txtNamaNum(n)		{ GUINama.num.text =	n;					}
+		public function set txtPremiumNum(n)	{ GUIPremium.num.text = n;					}
+		
+		public function set txtTalibanPrice(n)	{ GUITaliban.price.text =	"$"+n;			}
+		public function set txtNamaPrice(n)		{ GUINama.price.text =		"$"+n;			}
+		public function set txtPremiumPrice(n)	{ GUIPremium.price.text =	"$"+n;			}
+		
+		public function set txtPopup(n)			{ popup.msg.text = n;						}
+		
+		public function set txtGraphMoney(n)	{ GUIGraphMoney.txt.text = "$"+n;			}
+		public function set txtGraphClients(n)	{ GUIGraphClients.txt.text = n+" clients";	}
 		
 		
 		public function MenuTop(defParent	:MovieClip,
@@ -27,6 +42,14 @@
 			
 			txtTalibanNum = txtNamaNum = txtPremiumNum = txtTalibanPrice = txtNamaPrice = txtPremiumPrice = "00";
 			
+			popup.visible = false;
+			
+			timer = new Timer(1000);
+			timer.addEventListener(TimerEvent.TIMER,timerLst);
+			timer.start();
+			
+			moneyHistogram =	new Histogram(GUIGraphMoney,20,10,10,80,40,Graph.GREEN);
+			clientsHistogram =	new Histogram(GUIGraphClients,20,10,10,80,40,Graph.BLUE);
 			
 			BaseMc(this).display = MenuTop_display;
 			
@@ -93,19 +116,33 @@
 			txtNamaPrice =		Product.sellPrice(Product.NAMA);
 			txtTalibanPrice =	Product.sellPrice(Product.TALIBAN);
 		}
+		function timerLst(e :TimerEvent)
+		{
+			txtGraphMoney = Product.money;
+			moneyHistogram.addNumber(Product.money);
+			moneyHistogram.drawHistogram();
+			
+			if(Client.objects)
+			{
+				txtGraphClients = Client.objects.length;
+				clientsHistogram.addNumber(Client.objects.length);
+				clientsHistogram.drawHistogram();
+			}
+			
+		}
 		
 		
-		function btStockTalibanClickLst(e :MouseEvent)	{ Product.stock(Product.TALIBAN,1);		}
-		function btStockNamaClickLst(e :MouseEvent)		{ Product.stock(Product.NAMA,1);		}
-		function btStockPremiumClickLst(e :MouseEvent)	{ Product.stock(Product.PREMIUM,1); 	}
+		function btStockTalibanClickLst(e :MouseEvent)	{ Product.stock(Product.TALIBAN,Q_STOCK);	}
+		function btStockNamaClickLst(e :MouseEvent)		{ Product.stock(Product.NAMA,Q_STOCK);		}
+		function btStockPremiumClickLst(e :MouseEvent)	{ Product.stock(Product.PREMIUM,Q_STOCK); 	}
 		
-		function btUpTalibanClickLst(e :MouseEvent)		{ Product.upgrade(Product.TALIBAN); 	}
-		function btUpNamaClickLst(e :MouseEvent)			{ Product.upgrade(Product.NAMA);	}
-		function btUpPremiumClickLst(e :MouseEvent)		{ Product.upgrade(Product.PREMIUM); 	}
+		function btUpTalibanClickLst(e :MouseEvent)		{ Product.upgrade(Product.TALIBAN); 		}
+		function btUpNamaClickLst(e :MouseEvent)		{ Product.upgrade(Product.NAMA);			}	
+		function btUpPremiumClickLst(e :MouseEvent)		{ Product.upgrade(Product.PREMIUM); 		}
 		
-		function btDownTalibanClickLst(e :MouseEvent)	{ Product.downgrade(Product.TALIBAN);	}
-		function btDownNamaClickLst(e :MouseEvent)		{ Product.downgrade(Product.NAMA);		}
-		function btDownPremiumClickLst(e :MouseEvent)	{ Product.downgrade(Product.PREMIUM);	}
+		function btDownTalibanClickLst(e :MouseEvent)	{ Product.downgrade(Product.TALIBAN);		}
+		function btDownNamaClickLst(e :MouseEvent)		{ Product.downgrade(Product.NAMA);			}
+		function btDownPremiumClickLst(e :MouseEvent)	{ Product.downgrade(Product.PREMIUM);		}
 		
 		
 		function mouseMoveLst(e :MouseEvent)
