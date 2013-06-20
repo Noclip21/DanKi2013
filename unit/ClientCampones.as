@@ -1,16 +1,18 @@
 ﻿package unit
 {
 	import def.*;
+	import product.*;
+	import flash.geom.Point;
 	
 	
 	public class ClientCampones extends Client
 	{
-		public static var Clientobjects :Array;
+		public static var objects :Array;
 		
 		
-		public function ClientCampones()
+		public function ClientCampones(defStartPoint :Point,defEndPoint :Point)
 		{
-			super(2);
+			super(Product.TALIBAN,defStartPoint,defEndPoint);
 			
 			if(!objects) objects = new Array();
 			objects.push(this);

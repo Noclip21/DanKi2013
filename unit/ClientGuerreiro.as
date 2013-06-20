@@ -1,6 +1,8 @@
 ﻿package unit
 {
 	import def.*;
+	import product.*;
+	import flash.geom.Point;
 	
 	
 	public class ClientGuerreiro extends Client
@@ -8,9 +10,9 @@
 		public static var objects :Array;
 		
 		
-		public function ClientGuerreiro()
+		public function ClientGuerreiro(defStartPoint :Point,defEndPoint :Point)
 		{
-			super(1);
+			super(Product.NAMA,defStartPoint,defEndPoint);
 			
 			if(!objects) objects = new Array();
 			objects.push(this);

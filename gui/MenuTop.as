@@ -17,20 +17,26 @@
 		var timer				:Timer;
 		var moneyHistogram		:Histogram;
 		var clientsHistogram	:Histogram;
+		var camponesHistogram	:Histogram;
+		var guerreiroHistogram	:Histogram;
+		var nobreHistogram		:Histogram;
 		
 		
-		public function set txtTalibanNum(n)	{ GUITaliban.num.text = n; 					}
-		public function set txtNamaNum(n)		{ GUINama.num.text =	n;					}
-		public function set txtPremiumNum(n)	{ GUIPremium.num.text = n;					}
+		public function set txtTalibanNum(n)	{ GUITaliban.num.text = n; 						}
+		public function set txtNamaNum(n)		{ GUINama.num.text =	n;						}
+		public function set txtPremiumNum(n)	{ GUIPremium.num.text = n;						}
 		
-		public function set txtTalibanPrice(n)	{ GUITaliban.price.text =	"$"+n;			}
-		public function set txtNamaPrice(n)		{ GUINama.price.text =		"$"+n;			}
-		public function set txtPremiumPrice(n)	{ GUIPremium.price.text =	"$"+n;			}
+		public function set txtTalibanPrice(n)	{ GUITaliban.price.text =	"$"+n;				}
+		public function set txtNamaPrice(n)		{ GUINama.price.text =		"$"+n;				}
+		public function set txtPremiumPrice(n)	{ GUIPremium.price.text =	"$"+n;				}
 		
-		public function set txtPopup(n)			{ popup.msg.text = n;						}
+		public function set txtPopup(n)			{ popup.msg.text = n;							}
 		
-		public function set txtGraphMoney(n)	{ GUIGraphMoney.txt.text = "$"+n;			}
-		public function set txtGraphClients(n)	{ GUIGraphClients.txt.text = n+" clients";	}
+		public function set txtGraphMoney(n)	{ GUIGraphMoney.txt.text = "$"+n;				}
+		public function set txtGraphClients(n)	{ GUIGraphClients.txt.text = n+" clients";		}
+		public function set txtGraphCampones(n)	{ GUIGraphCampones.txt.text = n+" clients";		}
+		public function set txtGraphGuerreiro(n){ GUIGraphGuerreiro.txt.text = n+" clients";	}
+		public function set txtGraphNobre(n)	{ GUIGraphNobre.txt.text = n+" clients";		}
 		
 		
 		public function MenuTop(defParent	:MovieClip,
@@ -43,13 +49,18 @@
 			txtTalibanNum = txtNamaNum = txtPremiumNum = txtTalibanPrice = txtNamaPrice = txtPremiumPrice = "00";
 			
 			popup.visible = false;
+			GUIGraphCampones.visible = GUIGraphGuerreiro.visible = GUIGraphNobre.visible = popup.visible = false;
 			
 			timer = new Timer(1000);
 			timer.addEventListener(TimerEvent.TIMER,timerLst);
 			timer.start();
 			
-			moneyHistogram =	new Histogram(GUIGraphMoney,20,10,10,80,40,Graph.GREEN);
-			clientsHistogram =	new Histogram(GUIGraphClients,20,10,10,80,40,Graph.BLUE);
+			moneyHistogram =		new Histogram(GUIGraphMoney,100,10,10,80,40,Graph.GREEN);
+			clientsHistogram =		new Histogram(GUIGraphClients,100,10,10,80,40,0xFFFFFF);
+			camponesHistogram =		new Histogram(GUIGraphCampones,100,10,10,80,40,Graph.RED);
+			guerreiroHistogram =	new Histogram(GUIGraphGuerreiro,100,10,10,80,40,Graph.GREEN);
+			nobreHistogram =		new Histogram(GUIGraphNobre,100,10,10,80,40,Graph.BLUE);
+		
 			
 			BaseMc(this).display = MenuTop_display;
 			
@@ -93,6 +104,8 @@
 			btDownNama.addEventListener(MouseEvent.MOUSE_OVER,		btDownNamaOverLst);
 			btDownPremium.addEventListener(MouseEvent.MOUSE_OVER,	btDownPremiumOverLst);
 			
+			GUIGraphClients.addEventListener(MouseEvent.MOUSE_OVER, GUIGraphClientsOverLst);
+			
 				// mouse out
 			btStockTaliban.addEventListener(MouseEvent.MOUSE_OUT,	mouseOutLst);
 			btStockNama.addEventListener(MouseEvent.MOUSE_OUT,		mouseOutLst);
@@ -105,6 +118,8 @@
 			btDownTaliban.addEventListener(MouseEvent.MOUSE_OUT,	mouseOutLst);
 			btDownNama.addEventListener(MouseEvent.MOUSE_OUT,		mouseOutLst);
 			btDownPremium.addEventListener(MouseEvent.MOUSE_OUT,	mouseOutLst);
+			
+			GUIGraphClients.addEventListener(MouseEvent.MOUSE_OUT, GUIGraphClientsOutLst);
 		}
 		function MenuTop_display()
 		{
@@ -127,6 +142,24 @@
 				txtGraphClients = Client.objects.length;
 				clientsHistogram.addNumber(Client.objects.length);
 				clientsHistogram.drawHistogram();
+			}
+			if(ClientCampones.objects)
+			{
+				txtGraphCampones = ClientCampones.objects.length;
+				camponesHistogram.addNumber(ClientCampones.objects.length);
+				camponesHistogram.drawHistogram();
+			}
+			if(ClientGuerreiro.objects)
+			{
+				txtGraphGuerreiro = ClientGuerreiro.objects.length;
+				guerreiroHistogram.addNumber(ClientGuerreiro.objects.length);
+				guerreiroHistogram.drawHistogram();
+			}
+			if(ClientNobre.objects)
+			{
+				txtGraphNobre = ClientNobre.objects.length;
+				nobreHistogram.addNumber(ClientNobre.objects.length);
+				nobreHistogram.drawHistogram();
 			}
 			
 		}
@@ -204,6 +237,15 @@
 		function mouseOutLst(e :MouseEvent)
 		{
 			popup.visible = false;
+		}
+		
+		function GUIGraphClientsOverLst(e :MouseEvent)
+		{
+			GUIGraphCampones.visible = GUIGraphGuerreiro.visible = GUIGraphNobre.visible = true;
+		}
+		function GUIGraphClientsOutLst(e :MouseEvent)
+		{
+			GUIGraphCampones.visible = GUIGraphGuerreiro.visible = GUIGraphNobre.visible = false;
 		}
 	}
 	

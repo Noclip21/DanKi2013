@@ -43,9 +43,9 @@
 												 	 *	Taliban
 												 	 */
 											 
-		static const _lvlAppeal			:Array =	[[1.5,0.75,0.4],
+		static const _lvlAppeal			:Array =	[[1.5,0.5,0.25],
 													 [1.5,0.75,0.4],
-									 				 [1.5,0.75,0.4]];
+									 				 [1.5,1.0,0.75]];
 													/*
 													 *	Premium
 													 *	Nama
@@ -58,14 +58,14 @@
 		public static function set money(n :Number)	{ _money = n;			}
 		
 		
-		public static function validId(id :Number)		{ return (id >= 0 && id < FLAVOURS);													}
+		public static function validId(id :Number)		{ return (id >= 0 && id < FLAVOURS);						}
 		
-		public static function numStock(id :Number)		{ return (validId(id))?								_stock[id]:						-1; }
-		public static function level(id :Number)		{ return (validId(id))?								_lvl[id]:						-1;	}
-		public static function stockPrice(id :Number)	{ return (validId(id))?								_lvlStockPrice[id][_lvl[id]]:	-1;	}
-		public static function upgradePrice(id :Number)	{ return (validId(id))?								_lvlUpgradePrice[id][_lvl[id]]:	-1;	}
-		public static function sellPrice(id :Number)	{ return (validId(id))?								_lvlSellPrice[id][_lvl[id]]:	-1;	}
-		public static function appeal(id :Number)		{ return (validId(id))?								_lvlAppeal[id][_lvl[id]]:		-1;	}
+		public static function numStock(id :Number)		{ return (validId(id))?	_stock[id]:						-1; }
+		public static function level(id :Number)		{ return (validId(id))?	_lvl[id]:						-1;	}
+		public static function stockPrice(id :Number)	{ return (validId(id))?	_lvlStockPrice[id][_lvl[id]]:	-1;	}
+		public static function upgradePrice(id :Number)	{ return (validId(id))?	_lvlUpgradePrice[id][_lvl[id]]:	-1;	}
+		public static function sellPrice(id :Number)	{ return (validId(id))?	_lvlSellPrice[id][_lvl[id]]:	-1;	}
+		public static function appeal(id :Number)		{ return (validId(id))?	_lvlAppeal[id][_lvl[id]]:		-1;	}			
 		
 		
 		public static function upgrade(id :Number)

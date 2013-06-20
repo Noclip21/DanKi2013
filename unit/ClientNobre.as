@@ -1,6 +1,8 @@
 ﻿package unit
 {
 	import def.*;
+	import product.*;
+	import flash.geom.Point;
 	
 	
 	public class ClientNobre extends Client
@@ -8,9 +10,9 @@
 		public static var objects :Array;
 		
 		
-		public function ClientNobre()
+		public function ClientNobre(defStartPoint :Point,defEndPoint :Point)
 		{
-			super(0);
+			super(Product.PREMIUM,defStartPoint,defEndPoint);
 			
 			if(!objects) objects = new Array();
 			objects.push(this);

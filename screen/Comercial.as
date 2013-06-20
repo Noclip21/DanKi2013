@@ -42,9 +42,14 @@
 							   	Math.floor(Math.random()*3),
 							   	Math.floor(Math.random()*3)];
 			
-			if(Math.random()*100 <= Product.appeal(Product.PREMIUM))	new Client(Product.PREMIUM,	clientStartPoints[lanes[0]],clientEndPoints[lanes[0]]);
-			if(Math.random()*100 <= Product.appeal(Product.NAMA))		new Client(Product.NAMA,	clientStartPoints[lanes[1]],clientEndPoints[lanes[1]]);
-			if(Math.random()*100 <= Product.appeal(Product.TALIBAN))	new Client(Product.TALIBAN,	clientStartPoints[lanes[2]],clientEndPoints[lanes[2]]);
+			if(Math.random()*100 <= Product.appeal(Product.PREMIUM)*Promotion.multiplier(Product.PREMIUM))	new ClientNobre(	clientStartPoints[lanes[0]],clientEndPoints[lanes[0]]);
+			if(Math.random()*100 <= Product.appeal(Product.NAMA)*Promotion.multiplier(Product.NAMA))		new ClientGuerreiro(clientStartPoints[lanes[1]],clientEndPoints[lanes[1]]);
+			if(Math.random()*100 <= Product.appeal(Product.TALIBAN)*Promotion.multiplier(Product.TALIBAN))	new ClientCampones(	clientStartPoints[lanes[2]],clientEndPoints[lanes[2]]);
+			
+			
+			if(Main.key.isDown(49)) 		Promotion.activate(1); // 1
+			else if(Main.key.isDown(50))	Promotion.activate(2); // 2
+			else if(Main.key.isDown(51))	Promotion.activate(3); // 3
 		}
 	}
 	
