@@ -55,11 +55,11 @@
 			timer.addEventListener(TimerEvent.TIMER,timerLst);
 			timer.start();
 			
-			moneyHistogram =		new Histogram(GUIGraphMoney,100,10,10,80,40,Graph.GREEN);
-			clientsHistogram =		new Histogram(GUIGraphClients,100,10,10,80,40,0xFFFFFF);
-			camponesHistogram =		new Histogram(GUIGraphCampones,100,10,10,80,40,Graph.RED);
-			guerreiroHistogram =	new Histogram(GUIGraphGuerreiro,100,10,10,80,40,Graph.GREEN);
-			nobreHistogram =		new Histogram(GUIGraphNobre,100,10,10,80,40,Graph.BLUE);
+			moneyHistogram =		new Histogram(GUIGraphMoney,80,10,10,80,40,Graph.GREEN);
+			clientsHistogram =		new Histogram(GUIGraphClients,80,10,10,80,40,0xFFFFFF);
+			camponesHistogram =		new Histogram(GUIGraphCampones,80,10,10,80,40,Graph.RED);
+			guerreiroHistogram =	new Histogram(GUIGraphGuerreiro,80,10,10,80,40,Graph.GREEN);
+			nobreHistogram =		new Histogram(GUIGraphNobre,80,10,10,80,40,Graph.BLUE);
 		
 			
 			BaseMc(this).display = MenuTop_display;

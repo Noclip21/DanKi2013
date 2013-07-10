@@ -31,7 +31,7 @@
 								 new Point(Main.width,3*Main.height/5),
 								 new Point(Main.width,4*Main.height/5)];
 			
-			Product.money = 100;
+			Product.money = 9999;
 			
 			BaseMc(this).display = Comercial_display;
 		}
@@ -42,8 +42,12 @@
 							   	Math.floor(Math.random()*3),
 							   	Math.floor(Math.random()*3)];
 			
-			if(Math.random()*100 <= Product.appeal(Product.PREMIUM)*Promotion.multiplier(Product.PREMIUM))	new ClientNobre(	clientStartPoints[lanes[0]],clientEndPoints[lanes[0]]);
-			if(Math.random()*100 <= Product.appeal(Product.NAMA)*Promotion.multiplier(Product.NAMA))		new ClientGuerreiro(clientStartPoints[lanes[1]],clientEndPoints[lanes[1]]);
+			
+			var multiNama = ((ClientGuerreiro.objects)?ClientGuerreiro.objects.length:0);
+			var multiPremium = ((ClientNobre.objects)?ClientNobre.objects.length:0) + Product.appeal(Product.PREMIUM)*Promotion.multiplier(Product.PREMIUM);
+			
+			if(Math.random()*multiPremium <= Product.appeal(Product.PREMIUM)*Promotion.multiplier(Product.PREMIUM))	new ClientNobre(	clientStartPoints[lanes[0]],clientEndPoints[lanes[0]]);
+			if(Math.random()*multiNama <= Product.appeal(Product.NAMA)*Promotion.multiplier(Product.NAMA))		new ClientGuerreiro(clientStartPoints[lanes[1]],clientEndPoints[lanes[1]]);
 			if(Math.random()*100 <= Product.appeal(Product.TALIBAN)*Promotion.multiplier(Product.TALIBAN))	new ClientCampones(	clientStartPoints[lanes[2]],clientEndPoints[lanes[2]]);
 			
 			
